@@ -1,14 +1,18 @@
 site_name: MkDocs Starter
 theme:
   name: material
-  palette:
-    primary: teal
   features: 
     - content.code.annotate
     - navigation.instant
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
     - navigation.top
+    - navigation.indexes #to be review
+    - navigation.path
+    - toc.integrate
+    - toc.follow
+
 
 edit_uri: edit/main/docs/
 repo_url: https://github.com/boozallen/mkdocs-yamp-plugin
@@ -29,8 +33,8 @@ markdown_extensions:
   - pymdownx.betterem:
       smart_enable: all
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 plugins:
   - search: {}
@@ -40,15 +44,31 @@ plugins:
       # directory within docs dir to add content
       temp_dir: "repos"
       repos:
-        - url: https://github.com/steven-terrana/mkdocs-b
-          branch: develop
+        # - url: https://github.com/steven-terrana/mkdocs-b
+        #   repo_name: "mkdocs-b"
+        #   branch: develop
         - url: https://github.com/steven-terrana/mkdocs-a
+          repo_name: "mkdocs-a"
+        - url: https://bcerdass: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@github.com/boozallen/software-factory
+          repo_name: "software-factory"
+  - monorepo
+
+
+
+extra_css:
+ - css/extra.css #to be review
+
+extra: #to be review
+  generator: false
+  version:
+    provider: mike
+    default: latest
 
 # Page Tree
 nav:
   - Home: 
     - index.md
-  - Concepts:
-    - concepts/index.md
-    - repos/mkdocs-b/README.md
-    - repos/mkdocs-a/docs/concepts/concept.md
+
+  - Repositories:
+    - Software Factory: '!include ./docs/repos/software-factory/mkdocs.yml'
+    - mkdocs-a: '!include ./docs/repos/mkdocs-a/mkdocs.yml'
