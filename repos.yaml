@@ -1,0 +1,8 @@
+repos:
+  - url: https://github.com/steven-terrana/mkdocs-b
+    repo_name: "mkdocs-b"
+    branch: develop
+  - url: https://github.com/steven-terrana/mkdocs-a
+    repo_name: "mkdocs-a"
+  - url: https://bcerdass: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@github.com/boozallen/software-factory
+    repo_name: "software-factory"

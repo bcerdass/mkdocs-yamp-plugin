@@ -15,11 +15,14 @@ import os
 import shutil
 import logging
 import git
+import yaml
+import os
 
 from mkdocs.plugins import BasePlugin
 from mkdocs.config.base import Config
 from mkdocs.config import config_options as c
 from mkdocs.utils import warning_filter
+from pprint import pprint
 
 from .repo_item import RepoItem
 
@@ -43,6 +46,7 @@ class YAMPConfig(Config):
     # the list of repositories to clone
     repos = c.ListOfItems(c.SubConfig(RepoItem), default = [])
 
+
 class YAMP(BasePlugin[YAMPConfig]):
     """Aggregates repositories defined by users in the mkdocs.yaml"""
 
@@ -61,14 +65,52 @@ class YAMP(BasePlugin[YAMPConfig]):
         """
 
     # validates the repo configurations
+
+
+    def update_nav_paths(self, nav, repo_name):
+        """Update nav paths and integrate into a designated category."""
+        def update_path(item):
+            if isinstance(item, dict):
+                return {key: update_path(value) for key, value in item.items()}
+            elif isinstance(item, list):
+                return [update_path(subitem) for subitem in item]
+            else:
+                return f'repos/{repo_name}/docs/{item}'
+
+        return [update_path(item) for item in nav]
+
+
     def on_config(self, config):
-        """validates the repo configurations"""
+        """Validates the repo configurations and merges nav sections from external mkdocs.yml."""
+
+        new_nav_section = "Repositories"
+        new_nav_content = []
+
         for repo in self.config.repos:
             try:
                 repo.do_validation()
-            except:
-                log.warning('misconfigured repo: %s', repo)
+                # Logic to fetch and parse external mkdocs.yml
+                # Assume external_config is the parsed external mkdocs.yml
+                
+                external_mkdocs_path = os.path.join('docs/repos',repo.repo_name, 'mkdocs.yml') # Update repo_path accordingly
+                if os.path.exists(external_mkdocs_path):
+                    with open(external_mkdocs_path, 'r') as file:
+                        external_config = yaml.safe_load(file)
+
+                    if 'nav' in external_config:
+                        updated_nav = self.update_nav_paths(external_config['nav'], repo.repo_name)
+                        new_nav_content.append({repo.repo_name: updated_nav})
+
+            except Exception as e:
+                log.warning('Misconfigured repo: %s, Error: %s', repo, str(e))
                 raise
+
+        if new_nav_content:
+            config['nav'].append({new_nav_section: new_nav_content})
+        with open('output.txt', 'w') as file:
+            pprint(vars(config), stream=file)
+        return config
+
 
     def on_pre_build(self, config):
         """aggregates documentation"""

@@ -47,7 +47,7 @@ class RepoItem(Config):
 
     ### Configuration determined by self
     # the name of the sub directory created within the defined temp_dir
-    repo_name = None
+    repo_name = c.Type(str, default = "")
 
     # validate the user-provided configuration
     def do_validation(self):
