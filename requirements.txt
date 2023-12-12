@@ -1,3 +1,5 @@
-mkdocs==1.4.0
+mkdocs==1.5.3
+mkdocs-material>=9.4.0
+mkdocs-monorepo-plugin
 wheel
 GitPython==3.1.27
