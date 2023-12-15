@@ -33,17 +33,18 @@ dependencies = [
 ]
 
 [project.entry-points."mkdocs.plugins"]
-yamp = "yamp.plugin:YAMP"
+my_mkdocs_plugin = "my_mkdocs_plugin.my_mkdocs_plugin:MyCustomPlugin"
+editurl = "mkdocs_editurl_plugin.plugin:EditUrlPlugin"
 
 [project.urls]
 Homepage = "https://github.com/boozallen/mkdocs-yamp-plugin"
 
 [tool.hatch.version]
-path = "yamp/__init__.py"
+path = "my_mkdocs_plugin/__init__.py"
 
 [tool.hatch.build.targets.sdist]
 include = [
-    "/yamp",
+    "/my_mkdocs_plugin", "/mkdocs_editurl_plugin"
 ]
 exclude = [
   '/.github',
@@ -52,7 +53,7 @@ exclude = [
 
 [tool.hatch.build.targets.wheel]
 include = [
-    "/yamp",
+    "/my_mkdocs_plugin", "/mkdocs_editurl_plugin"
 ]
 exclude = [
   '/.github',

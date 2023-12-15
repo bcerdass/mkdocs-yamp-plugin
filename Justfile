@@ -71,4 +71,4 @@ docs: buildDocsImage
 
 # serve the docs locally for development
 serve: buildDocsImage
-  docker run --rm -p 8000:8000 -v $(pwd)/..:/docs -w /docs/$(basename $(pwd)) {{docsImage}} serve -a 0.0.0.0:8000
+  docker run --env-file .env --rm -p 8000:8000 -v $(pwd)/..:/docs -w /docs/$(basename $(pwd)) {{docsImage}} serve -a 0.0.0.0:8000

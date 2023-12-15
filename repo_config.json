@@ -1,0 +1,28 @@
+{
+  "repositories": [
+    {
+      "name": "mkdocs-starter",
+      "url": "https://github.com/steven-terrana/mkdocs-a",
+      "branch": "main",
+      "requires_auth": false
+    },
+    {
+      "name": "booz-allen-software-factory",
+      "url": "https://github.boozallencsn.com/Solutions-Center/software-factory",
+      "branch": "main",
+      "requires_auth": true
+    },
+    {
+      "name": "solutions-delivery-platform",
+      "url": "https://github.com/boozallen/sdp-libraries",
+      "branch": "develop",
+      "requires_auth": false
+    },
+    {
+      "name": "UIP-Design-Kit",
+      "url": "https://github.boozallencsn.com/Solutions-Center/design-kit",
+      "branch": "main",
+      "requires_auth": true
+    }
+  ]
+}

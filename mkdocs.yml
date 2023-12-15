@@ -3,7 +3,8 @@ theme:
   name: material
   features: 
     - content.code.annotate
-    - navigation.instant
+    - content.action.edit
+    #- navigation.instant #Disabled so repository information is being updated on every click
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.sections
@@ -38,20 +39,9 @@ markdown_extensions:
 
 plugins:
   - search: {}
-  - yamp:
-      # delete docs/repos after build||serve?
-      cleanup: false
-      # directory within docs dir to add content
-      temp_dir: "repos"
-      repos:
-        # - url: https://github.com/steven-terrana/mkdocs-b
-        #   repo_name: "mkdocs-b"
-        #   branch: develop
-        - url: https://github.com/steven-terrana/mkdocs-a
-          repo_name: "mkdocs-a"
-        - url: https://bcerdass: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@github.com/boozallen/software-factory
-          repo_name: "software-factory"
+  - my_mkdocs_plugin
   - monorepo
+  - editurl
 
 
 
@@ -63,6 +53,7 @@ extra: #to be review
   version:
     provider: mike
     default: latest
+  repo_config_path: 'repo_config.json'
 
 # Page Tree
 nav:
@@ -70,5 +61,7 @@ nav:
     - index.md
 
   - Repositories:
-    - Software Factory: '!include ./docs/repos/software-factory/mkdocs.yml'
-    - mkdocs-a: '!include ./docs/repos/mkdocs-a/mkdocs.yml'
+    - Software Factory: '!include docs/repos/booz-allen-software-factory/mkdocs.yml'
+    - mkdocs-a: '!include docs/repos/mkdocs-starter/mkdocs.yml'
+    - solutions-delivery-platform: '!include docs/repos/solutions-delivery-platform/mkdocs.yml'
+    - UIP-Design-Kit: '!include docs/repos/UIP-Design-Kit/mkdocs.yml'
