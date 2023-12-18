@@ -3,3 +3,4 @@ site/
 dist/
 .pypi.env
 .venv
+.env

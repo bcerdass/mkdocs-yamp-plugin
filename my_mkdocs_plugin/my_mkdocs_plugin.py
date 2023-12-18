@@ -18,7 +18,6 @@ class MyCustomPlugin(BasePlugin):
             url = repo['url']
             branch = repo.get('branch', 'main')
             requires_auth = repo.get('requires_auth', False)
-            #target_dir = os.path.join('docs', 'repos', repo['name'])
             target_dir = os.path.join('docs', 'repos', repo['name'])
 
             # Modify the URL for repositories requiring authentication

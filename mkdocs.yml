@@ -61,7 +61,8 @@ nav:
     - index.md
 
   - Repositories:
-    - Software Factory: '!include docs/repos/booz-allen-software-factory/mkdocs.yml'
     - mkdocs-a: '!include docs/repos/mkdocs-starter/mkdocs.yml'
     - solutions-delivery-platform: '!include docs/repos/solutions-delivery-platform/mkdocs.yml'
     - UIP-Design-Kit: '!include docs/repos/UIP-Design-Kit/mkdocs.yml'
+  - test:
+    - Software Factory: '!include docs/repos/booz-allen-software-factory/mkdocs.yml'
